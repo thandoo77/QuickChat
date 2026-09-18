@@ -8,10 +8,11 @@ import java.util.Scanner;
  *
  * @author Student
  */
-public class QuickChat {
+
+   public class QuickChat {
 
     public static void main(String[] args) {
-       
+
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Welcome to QuickChat!");
@@ -41,7 +42,9 @@ public class QuickChat {
 
         System.out.println();
 
-        System.out.println(user.registerUser());
+        String registrationMessage = user.registerUser();
+
+        System.out.println(registrationMessage);
 
         if (user.checkUserName()
                 && user.checkPasswordComplexity()
@@ -58,6 +61,12 @@ public class QuickChat {
 
             System.out.println(
                     user.returnLoginStatus(loginUsername, loginPassword)
+            );
+
+        } else {
+
+            System.out.println(
+                    "Registration was unsuccessful. Please correct your details and try again."
             );
         }
 
