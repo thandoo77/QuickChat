@@ -59,9 +59,9 @@ import java.util.Scanner;
             System.out.print("Enter your password: ");
             String loginPassword = scanner.nextLine();
 
-            System.out.println(
-                    user.returnLoginStatus(loginUsername, loginPassword)
-            );
+            String loginMessage = user.returnLoginStatus(loginUsername, loginPassword);
+
+            System.out.println(loginMessage);
 
         } else {
 
