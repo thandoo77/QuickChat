@@ -11,14 +11,14 @@ package com.mycompany.quickchat;
 
 public class Login {
 
-    // Variables
+    // Stores the user's registration information
     private String firstName;
     private String lastName;
     private String username;
     private String password;
     private String cellPhoneNumber;
 
-    // Constructor
+    // Creates a Login object using the user's registration details
     public Login(String firstName, String lastName, String username,
                  String password, String cellPhoneNumber) {
 
