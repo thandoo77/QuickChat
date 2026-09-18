@@ -48,7 +48,7 @@ public class QuickChat {
                 && user.checkCellPhoneNumber()) {
 
             System.out.println();
-            System.out.println("Please log in.");
+            System.out.println("===== LOGIN =====");
 
             System.out.print("Enter your username: ");
             String loginUsername = scanner.nextLine();
