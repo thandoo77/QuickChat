@@ -70,8 +70,9 @@ public class Login {
                 && hasSpecial;
     }
 
-    // Checks if the cellphone number has the South African
-    // international code +27 followed by 9 digits
+    // Regular expression adapted from Java regular expression syntax
+    // documentation: https://docs.oracle.com/javase/tutorial/essential/regex/
+    // The expression checks for +27 followed by exactly 9 digits.
     public boolean checkCellPhoneNumber() {
 
         String regex = "^\\+27[0-9]{9}$";
