@@ -97,7 +97,7 @@ public class Login {
         return "Username successfully captured.\n"
                 + "Password successfully captured.\n"
                 + "Cell phone number successfully added.\n"
-                + "Registration successful.";
+                + "Registration successful! You can now log in.";
     }
 
     // Checks whether the username and password entered
