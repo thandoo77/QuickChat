@@ -1,11 +1,14 @@
-branches:
-      - master
-      - part-2-messaging
+name: QuickChat Maven Tests
+
+on:
+  push:
+    branches: [master, part-2-messaging]
+  pull_request:
+    branches: [master, part-2-messaging]
 
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
