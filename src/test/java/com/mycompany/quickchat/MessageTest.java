@@ -6,6 +6,7 @@ package com.mycompany.quickchat;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  *
@@ -14,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class MessageTest {
+
 
     @Test
     public void testMessageLengthValid() {
@@ -85,14 +87,122 @@ public class MessageTest {
     }
 
     @Test
-public void testMessageHashFormat() {
-    Message message = new Message(
-            "0012345678",
-            "+27718693002",
-            "Hi Mike, can you join us for dinner tonight?",
-            0
-    );
+    public void testMessageHashFormat() {
+        Message message = new Message(
+                "0012345678",
+                "+27718693002",
+                "Hi Mike, can you join us for dinner tonight?",
+                0
+        );
 
-    assertEquals("00:0:HITONIGHT", message.createMessageHash());
-}
-}
+        assertEquals(
+                "00:0:HITONIGHT",
+                message.createMessageHash()
+        );
+    }
+
+    // PART 3 TESTS
+
+    @Test
+    public void testMessageInitiallyNotSent() {
+        Message message = new Message(
+                "+27718693002",
+                "Hello there",
+                0
+        );
+
+        assertFalse(message.isSent());
+    }
+
+    @Test
+    public void testMessageSuccessfullySent() {
+        Message message = new Message(
+                "+27718693002",
+                "Hello there",
+                0
+        );
+
+        assertEquals(
+                "Message successfully sent.",
+                message.SentMessage()
+        );
+
+        assertTrue(message.isSent());
+    }
+
+    @Test
+    public void testMessageInitiallyNotStored() {
+        Message message = new Message(
+                "+27718693002",
+                "Hello there",
+                0
+        );
+
+        assertFalse(message.isStored());
+    }
+
+    @Test
+    public void testMessageInitiallyNotDiscarded() {
+        Message message = new Message(
+                "+27718693002",
+                "Hello there",
+                0
+        );
+
+        assertFalse(message.isDiscarded());
+    }
+
+    @Test
+    public void testMessageDetails() {
+        Message message = new Message(
+                "0012345678",
+                "+27718693002",
+                "Hello there",
+                0
+        );
+
+        assertEquals("0012345678", message.getMessageID());
+        assertEquals("+27718693002", message.getRecipient());
+        assertEquals("Hello there", message.getMessageText());
+        assertEquals("00:0:HELLOTHERE", message.getMessageHash());
+    }
+
+    @Test
+    public void testPrintMessages() {
+        Message message = new Message(
+                "0012345678",
+                "+27718693002",
+                "Hello there",
+                0
+        );
+
+        String result = message.printMessages();
+
+        assertTrue(result.contains("Message ID: 0012345678"));
+        assertTrue(result.contains("Recipient: +27718693002"));
+        assertTrue(result.contains("Message: Hello there"));
+    }
+        @Test
+    public void testMessageHashLoop() {
+
+        Message[] messages = {
+            new Message("0012345678", "+27718693002", "Hello there", 0),
+            new Message("1112345678", "+27718693002", "Good morning friend", 1),
+            new Message("2212345678", "+27718693002", "See you tomorrow", 2)
+        };
+
+        String[] expectedHashes = {
+            "00:0:HELLOTHERE",
+            "11:1:GOODFRIEND",
+            "22:2:SEETOMORROW"
+        };
+
+        for (int i = 0; i < messages.length; i++) {
+
+            assertEquals(
+                expectedHashes[i],
+                messages[i].createMessageHash()
+            );
+        }
+    }
+} 
